@@ -1,0 +1,20 @@
+.backgrounApp {
+    background-image:linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
+    url(../../public/img/gatos.jpg);
+    background-position: center;
+    background-size:contain;
+    height: 100vh;
+}
+.menu-list li{
+    list-style: none;
+}
+.photoUser{
+    width: 3em;
+    height: 3em;
+    clip-path: circle(50% at 50% 50%);
+}
+.buttonHome{
+    background-color: #fff;
+    color: #777;
+    border: none;
+}
