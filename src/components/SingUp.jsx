@@ -12,15 +12,21 @@ const SingUp = () => {
 
     const [user, setUser] = useState({ email: "", password: "" });
     const [error, setError] = useState();
+    const [loading, setLoading] = useState(false)
+    
 
     const handleChange = ({ target: { name, value } }) => setUser({ ...user, [name]: value })
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError('')
+        setLoading(true)
+
         try {
             await singUp(user.email, user.password)
             navigate("/")
+            
         } catch (error) {
             error.code === 'auth/email-already-in-use' && setError('The mail is already in use')
             error.code === 'auth/invalid-email' && setError('Complete the form')
@@ -71,8 +77,11 @@ const SingUp = () => {
                     </div>
                     <div className="field">
                         <p class="control ">
-                            <button class="button is-success is-medium is-fullwidth ">
-                                Singup
+                            <button
+                                className=
+                                {(!error && loading)
+                                    ? "button is-success is-medium is-fullwidth mb-2 is-loading"
+                                    : "button is-success is-medium is-fullwidth mb-2 "}>Singup
                             </button>
                         </p>
                     </div>

@@ -1,9 +1,16 @@
-.backgrounApp {
+.backgrounApp{
     background-image:linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
     url(../../public/img/gatos.jpg);
     background-position: center;
     background-size:contain;
     height: 100vh;
+}
+.backgrounApp-active{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
+    url(../../public/img/gatos.jpg);
+    background-position: center;
+    background-size:contain;
+    height: auto;
 }
 .menu-list li{
     list-style: none;
@@ -17,4 +24,28 @@
     background-color: #fff;
     color: #777;
     border: none;
+}
+.card{
+    width: 20em;
+    height: 28em;
+}
+.description{
+    overflow-y: scroll;
+    height: 3em;
+    scrollbar-width: thin;
+    scrollbar-color: #00d1b2 white;
+}
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: white;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #00d1b2;
+    border-radius: 20px;
+    border: 3px solid white;
 }

@@ -6,22 +6,30 @@ import { Link, useNavigate } from "react-router-dom";
 import { Alert } from './Alert';
 
 const Login = () => {
+    
     const navigate = useNavigate();
     const { login, loginGoogle } = useAuth();
 
     const [user, setUser] = useState({ email: "", password: "" });
     const [error, setError] = useState();
+    const [loading, setLoading] = useState(false)
 
     const handleChange = ({ target: { name, value } }) => setUser({ ...user, [name]: value })
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError('')
+        setLoading(true)
+        
         try {
             await login(user.email, user.password)
             navigate("/")
+
         } catch (error) {
-            setError('User or password not found')
+            error.code === 'auth/wrong-password' && setError('Password invalid')
+            error.code === 'auth/user-not-found' && setError('User invalid')
+            error.code === 'auth/invalid-email' && setError('Complete the form')
+            error.code === 'auth/internal-error' && setError('Enter the password')
         }
     }
 
@@ -34,7 +42,7 @@ const Login = () => {
             setError("Can't connect with your gmail user")
         }
     }
-
+    
 
 
     return (
@@ -67,7 +75,7 @@ const Login = () => {
                                 id='password'
                                 placeholder="Password"
                                 onChange={handleChange} />
-                            <span class="icon is-small is-left">
+                            <span className="icon is-small is-left">
                                 <FontAwesomeIcon icon={faLock} />
                             </span>
                         </p>
@@ -77,11 +85,20 @@ const Login = () => {
                     </div>
                     <div className="field">
                         <p className="control ">
-                            <button class="button is-success is-medium is-fullwidth mb-2">
+                            <button
+                                className=
+                                {(!error && loading)
+                                    ? "button is-success is-medium is-fullwidth mb-2 is-loading"
+                                    : "button is-success is-medium is-fullwidth mb-2 "}>
                                 Login
                             </button>
-                            <button onClick={handleGoogle} class="button is-danger is-medium is-fullwidth ">
-                                Login whit Google 🚀
+                            <button
+                                onClick={handleGoogle}
+                                className=
+                                {(!error && loading)
+                                    ? "button is-danger is-medium is-fullwidth is-loading"
+                                    : "button is-danger is-medium is-fullwidth"}>
+                                Login whith Google 🚀
                             </button>
                         </p>
                     </div>

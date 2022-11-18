@@ -1,33 +1,36 @@
-    import { useAuth } from "../context/AuthContext";
-    import '../css/main.css';
+import { useAuth } from "../context/AuthContext";
+import { ListRooms } from "./ListRooms";
+import { NavbarHome } from "./NavbarHome";
+import '../css/main.css';
 
-    const Home = () => {
+const Home = () => {
 
-        const { user, logout, loading } = useAuth();
+    const {  logout, loading, room } = useAuth();
 
-        const handleLogaut = async() => {
-            await logout()
-        }
-
-        if(loading) return <p>Loading...</p>
-
-        return (
-            <div className="content backgrounApp">
-                <aside className="menu has-background-primary p-3 is-flex is-align-items-center is-justify-content-space-between">
-                    <ul className="menu-list">
-                        <li>
-                            <button onClick={handleLogaut} className="button is-normal has-text-weight-bold buttonHome">
-                                SingOut
-                            </button>
-                        </li>
-                    </ul>
-                    <ul className="menu-list is-flex is-align-items-flex-start">
-                        <li className="is-align-self-center has-text-white">Hola <span className="has-text-weight-bold">{user.displayName || user.email}</span></li>
-                        <li className="photoUser ml-2 "><img src={user.photoURL} alt="usuario" /></li>
-                    </ul>
-                </aside>
-            </div>
-        )
+    const handleLogaut = async () => {
+        await logout()
     }
 
-    export { Home }
+    if (loading) return <p>Loading...</p>
+    
+    
+    return (
+        <div className={room.length > 0 ? "content backgrounApp-active" : "content backgrounApp"}>
+            <aside className="menu has-background-primary p-3 is-flex is-align-items-center is-justify-content-space-between">
+                <NavbarHome handleLogaut={handleLogaut}/>
+            </aside>
+
+            <aside className="colums">
+                <div className="section">
+                    <div className="container is-flex is-flex-wrap-wrap">
+                        {
+                            room.map(r => <span key={r.id}><ListRooms room={r} /> </span>)
+                        }
+                    </div>
+                </div>
+            </aside>
+        </div>
+    )
+}
+
+export { Home }

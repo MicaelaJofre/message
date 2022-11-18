@@ -4,7 +4,9 @@ import { Home } from './components/Home';
 import { Login } from './components/Login';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { ResetPassword } from './components/ResetPassword';
+import { Rooms } from './components/Rooms';
 import { SingUp } from './components/SingUp';
+import { UpdateRoom } from './components/UpdateRoom';
 import { AuthProvider } from "./context/AuthContext";
 import './css/main.css'
 
@@ -14,18 +16,23 @@ function App() {
     <div className="App">
       <AuthProvider>
         <Routes>
-          <Route path='/' element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          } />
+          <Route
+            path='/'
+            element={
+              <ProtectedRoute>
+                <Home/>
+              </ProtectedRoute>
+            } />
           <Route path='/singup' element={<SingUp />} />
           <Route path='/login' element={<Login />} />
           <Route path='/resetPassword' element={<ResetPassword />} />
+          <Route path='/rooms' element={<Rooms />} />
+          <Route path='/updateRoom' element={<UpdateRoom />} />
         </Routes>
       </AuthProvider>
+
     </div>
   );
 }
 
-export {App};
+export { App };

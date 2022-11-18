@@ -10,17 +10,25 @@ const ResetPassword = () => {
 
     const [user, setUser] = useState({ email: "" });
     const [error, setError] = useState();
+    const [loading, setLoading] = useState(false)
+
+
 
     const handleChange = ({ target: { name, value } }) => setUser({ ...user, [name]: value })
 
+
     const handleResetPassword = async(e) => {
         e.preventDefault()
+        setLoading(true)
+
         if (!user.email) return setError('Please enter your email')
+
         try {
             await resetPassword(user.email)
             setError('We send you an email whit link to reset your password')
+
         } catch (error) {
-            setError(error.message)
+            error.code === 'auth/user-not-found' && setError('Email invalid')
         }
     }
 
@@ -51,7 +59,12 @@ const ResetPassword = () => {
                     </div>
                     <div className="field">
                         <p className="control ">
-                            <button onClick={handleResetPassword} class="button is-success is-medium is-fullwidth mb-2">
+                            <button
+                                onClick={handleResetPassword}
+                                className=
+                                {(!error && loading)
+                                    ? "button is-success is-medium is-fullwidth mb-2 is-loading"
+                                    : "button is-success is-medium is-fullwidth mb-2 "}>
                                 Send
                             </button>
                         </p>
