@@ -67,7 +67,7 @@ const SingUp = () => {
                                 id='password'
                                 placeholder="Password"
                                 onChange={handleChange} />
-                            <span class="icon is-small is-left">
+                            <span className="icon is-small is-left">
                                 <FontAwesomeIcon icon={faLock} />
                             </span>
                         </p>
@@ -76,7 +76,7 @@ const SingUp = () => {
                         {error && <Alert message={error} />}
                     </div>
                     <div className="field">
-                        <p class="control ">
+                        <p className="control ">
                             <button
                                 className=
                                 {(!error && loading)

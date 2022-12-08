@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faBook } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../context/AuthContext";
 import { Alert } from './Alert';
-import { useNavigate, Link, useLocation } from "react-router-dom";
-import { ListRooms } from './ListRooms';
+import { useNavigate, useLocation } from "react-router-dom";
 
 const UpdateRoom = () => {
     //trae el id ListRoom por el Link
@@ -14,7 +13,7 @@ const UpdateRoom = () => {
     const [error, setError] = useState()
     
 
-    const { updateRoom } = useAuth();
+    const { updateRoom, deleteRoom } = useAuth();
 
     const handleChange = ({ target: { name, value } }) => setUser({ ...user, [name]: value })
 
@@ -23,16 +22,14 @@ const UpdateRoom = () => {
 
     const updateRooms = async (e) => {
         e.preventDefault()
-        setError('')
-
 
         try {
 
             if (!location.state) throw new Error('Could not find room')
+            setError('Room edition')
 
             await updateRoom(location.state, user.name, user.description)
             setUser({ name: '', description: '' })
-            setError('Room created')
 
 
             setTimeout(() => {
@@ -40,10 +37,24 @@ const UpdateRoom = () => {
             }, 1000);
 
         } catch (error) {
-            console.log(error.message);
+            console.log(error.message)
             setError(error.message)
         } 
     }
+
+    const deleteRooms = async () => {
+        try {
+            if (!location.state) throw new Error('Could not find room')
+            setError('Room delete')
+            await deleteRoom(location.state)
+            navigate("/")
+
+        } catch (error) {
+            console.log(error.message)
+            setError(error.message)
+        }
+    }
+
     return (
         <div className='hero is-fullheight has-background-light backgrounApp'>
             <div className='hero is-small is-primary'>
@@ -87,19 +98,21 @@ const UpdateRoom = () => {
                         {error && <Alert message={error} />}
                     </div>
                     <div className="field">
-                        <p class="content is-flex is-justify-content-space-evenly">
+                        <p className="content is-flex is-justify-content-space-evenly">
                             <button
                                 className="button is-success "
                                 type='submit'>
                                 Update
                             </button>
-                        <button className="button is-danger ">
-                                <Link
-                                    className="button is-danger "
-                                    to='/'>
-                                    Delete
-                                </Link>
-                        </button>
+                        <p className="button is-danger ">
+                            <button
+                                className="button is-danger "
+                                type='button'
+                                name='delete'
+                                onClick={deleteRooms}>
+                                Delete
+                            </button>    
+                        </p>
                         </p>
                     </div>
                 </form>

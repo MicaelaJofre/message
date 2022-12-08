@@ -7,6 +7,7 @@ import { ResetPassword } from './components/ResetPassword';
 import { Rooms } from './components/Rooms';
 import { SingUp } from './components/SingUp';
 import { UpdateRoom } from './components/UpdateRoom';
+import { ViewRoom } from './components/ViewRoom';
 import { AuthProvider } from "./context/AuthContext";
 import './css/main.css'
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/resetPassword' element={<ResetPassword />} />
           <Route path='/rooms' element={<Rooms />} />
           <Route path='/updateRoom' element={<UpdateRoom />} />
+          <Route path='/viewRoom' element={<ViewRoom/>} />
         </Routes>
       </AuthProvider>
 

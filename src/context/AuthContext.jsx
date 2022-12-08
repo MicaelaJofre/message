@@ -17,7 +17,8 @@ import {
     getFirestore,
     onSnapshot, 
     doc,
-    updateDoc
+    updateDoc,
+    deleteDoc,
 } from 'firebase/firestore';
 
 
@@ -33,12 +34,27 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
+    const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
 
-    
-    
+    const createNewUser = ({ displayName, email, photoURL, uid }) => {
+        const queryCollection = collection(db, 'Users')
+        const names = ["Foca", "Perro", "Gato", "Carpincho", "Pato", "Ornitorrinco"]
+        addDoc(queryCollection, {
+            displayName: displayName || names[Math.floor(Math.random() * names.length)],
+            email,
+            photoURL: photoURL || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+            uid,
+        })
+    }
+
     //crear usuario
-    const singUp = (email, password) => createUserWithEmailAndPassword(auth, email, password);//updateProfile agregar name
+    const singUp = (email, password) => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(({ user }) => {
+                createNewUser(user)
+            })
+    }
 
     //verificar usuario     
     const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
@@ -47,10 +63,13 @@ export const AuthProvider = ({ children }) => {
     const logout = () => signOut(auth);
 
     //login con google
-    const loginGoogle = async() => {
+    const loginGoogle = async () => {
+        console.log("here")
         try {
             const provider = new GoogleAuthProvider()
-            return await signInWithPopup(auth, provider)
+            return signInWithPopup(auth, provider).then(({ user }) => {
+                createNewUser(user)
+            })
         } catch (error) {
             console.log(error.message);
         }
@@ -58,7 +77,23 @@ export const AuthProvider = ({ children }) => {
 
     //reset password
     const resetPassword = async (email) => await sendPasswordResetEmail(auth, email)
-    
+
+    const getAllUsers = () => {
+        const usersList = []
+        const query = collection(db, 'Users')
+        onSnapshot(query, querySnapshop => {
+            querySnapshop.forEach((doc) => {
+                const user = doc.data()
+                usersList.push(user)
+            })
+        })
+        setUsers(usersList)
+    }
+
+    useEffect(() => {
+        getAllUsers()
+    }, [])
+
 
     ////////////rooms///////////////////
 
@@ -71,7 +106,7 @@ export const AuthProvider = ({ children }) => {
     // creamos el room
     const createRoom = (name, description) => {
 
-        const queryCollection =  collection(db, 'Rooms')
+        const queryCollection = collection(db, 'Rooms')
 
         addDoc(queryCollection, {
             name,
@@ -116,32 +151,17 @@ export const AuthProvider = ({ children }) => {
                     roomData.splice(index, 1)
                 }
             });
-            console.log(roomData);
             setRoom(roomData)
             setLoading(false)
         })
 
-        /* const query = collection(db, 'Rooms')
-        orderBy("createdAt", "desc")
-        onSnapshot(query, querySnapshop => {
-
-            const rooms = []
-            setLoading(true)
-            querySnapshop.forEach(doc => {
-                let room = doc.data()
-                room.id = doc.id
-                rooms.push(room)
-            });
-            setLoading(false)
-            setRoom(rooms)
-        }) */
     }
 
     
 
     //editamos el room
 
-    const updateRoom = async(id, name, description) => {
+    const updateRoom = async (id, name, description) => {
         const roomDate = {}
         
         if (room.find(r => r.id === id)?.adminUid !== user.uid) throw new Error('user not valid')
@@ -150,15 +170,73 @@ export const AuthProvider = ({ children }) => {
         
         const queryCollection = doc(db, 'Rooms', id)
         try {
-            await updateDoc(queryCollection, roomDate)            
+            await updateDoc(queryCollection, roomDate)
         } catch (error) {
             console.error(error.message);
         }
-
     }
 
-    //////////////////////////////////////////////
+    //eliminamos el room
 
+    const deleteRoom = async (id) => {
+        const queryCollection = doc(db, 'Rooms', id)
+        const queryCollectionMessages = collection(db, 'Rooms', id, 'messages')
+
+        await deleteDoc(queryCollection)
+            
+        onSnapshot(queryCollectionMessages, querySnapshop => {
+            querySnapshop.forEach(async (doc) => {
+                await deleteDoc(doc.ref)
+            })
+        })
+        setMessages([])
+    }
+
+    useEffect(() => {
+        getRooms()
+    }, [room])
+    
+
+    ////////////////////////////////////////////////
+    
+    //Enviar mensajes
+    const createMessages = async (id, message) => {
+        const query = collection(db, 'Rooms', id, 'messages')
+        await addDoc(query, {
+            userUid: user.uid,
+            adminName: user.displayName,
+            message,
+            createdAt: Date.now()
+        })
+    }
+    //Mostrar mensajes
+    const [messages, setMessages] = useState([])
+    const [messagesListener, setMessagesListener] = useState(null)
+
+    const getMessages = async (id) => {
+
+        const query = collection(db, 'Rooms', id, 'messages')
+        orderBy("createdAt")
+        
+        //dejar de ver los mensajes en el caso de no estar en el room
+        setMessagesListener(query ? query : null)
+        
+        
+        onSnapshot(query, querySnapshop => {
+            let dataMessage = []
+            querySnapshop.forEach(doc => {
+                let message = doc.data()
+                message.id = doc.id
+                dataMessage.unshift(message)
+            })
+
+            setMessages(dataMessage.sort((a, b) => a.createdAt - b.createdAt))
+        })
+    }
+
+
+    //////////////////////////////////////////////
+    
     //permanecia de la autentificación
     useEffect(() => {
         
@@ -171,11 +249,15 @@ export const AuthProvider = ({ children }) => {
             else {
                 setRoom([]) 
                 setRoomsListener(null)
+                setMessages([])
+                setMessagesListener(null)
             } 
         })
         
         return () => unsubscribe();
     }, [])
+
+    
 
     return (
         <AuthContext.Provider value={{
@@ -189,7 +271,13 @@ export const AuthProvider = ({ children }) => {
             setRoom,
             room,
             createRoom,
-            updateRoom
+            updateRoom,
+            getMessages,
+            createMessages,
+            setMessagesListener, 
+            messages,
+            users,
+            deleteRoom
         }}>
             {children}
         </AuthContext.Provider>

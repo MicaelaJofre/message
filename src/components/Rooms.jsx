@@ -7,8 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Rooms = () => {
 
-    const [user, setUser] = useState({ name: "", description: "" });
-    const [loading, setLoading] = useState(false)
+    const [user, setUser] = useState({ name: "", description: "" })
     const [error, setError] = useState()
 
     const { createRoom } = useAuth();
@@ -20,14 +19,12 @@ const Rooms = () => {
 
     const setCreateRoom = async(e) => {
         e.preventDefault()
-        setLoading(true)
-        setError('')
         
 
         try {
+            setError('Room created')
             await createRoom(user.name, user.description)
             setUser({ name: '', description: '' })
-            setError('Room created')
             
 
             setTimeout(() => {
@@ -37,9 +34,7 @@ const Rooms = () => {
         } catch (error) {
             console.log(error.message);
             setError(error.message)
-        } finally {
-            setLoading(false)
-        }
+        } 
     }
     return (
         <div className='hero is-fullheight has-background-light backgrounApp'>
@@ -86,7 +81,7 @@ const Rooms = () => {
                         {error && <Alert message={error} />}
                     </div>
                     <div className="field">
-                        <p class="control ">
+                        <p className="control ">
                             <button
                                 className="button is-success is-medium is-fullwidth "
                                 type='submit'>

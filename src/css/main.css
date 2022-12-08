@@ -1,40 +1,47 @@
-.backgrounApp{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
-    url(../../public/img/gatos.jpg);
+.backgrounApp {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
+        url(../../public/img/gatos.jpg);
     background-position: center;
-    background-size:contain;
+    background-size: contain;
     height: 100vh;
 }
-.backgrounApp-active{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
-    url(../../public/img/gatos.jpg);
+
+.backgrounApp-active {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
+        url(../../public/img/gatos.jpg);
     background-position: center;
-    background-size:contain;
+    background-size: contain;
     height: auto;
 }
-.menu-list li{
+
+.menu-list li {
     list-style: none;
 }
-.photoUser{
+
+.photoUser {
     width: 3em;
     height: 3em;
     clip-path: circle(50% at 50% 50%);
 }
-.buttonHome{
+
+.buttonHome {
     background-color: #fff;
     color: #777;
     border: none;
 }
-.card{
+
+.card {
     width: 20em;
     height: 28em;
 }
-.description{
+
+.description {
     overflow-y: scroll;
     height: 3em;
     scrollbar-width: thin;
     scrollbar-color: #00d1b2 white;
 }
+
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
     width: 12px;
@@ -48,4 +55,170 @@
     background-color: #00d1b2;
     border-radius: 20px;
     border: 3px solid white;
+}
+
+/** message* */
+.columns {
+    width: 50vw;
+    justify-content: center;
+}
+
+.infoMessage {
+    display: flex;
+    align-items: center;
+    background-color: #00d1b2;
+    padding: .5em;
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+}
+
+.photoUser {
+    width: 3em;
+    height: 3em;
+    clip-path: circle(50% at 50% 50%);
+}
+
+.titleMessage {
+    padding-left: 1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    animation: move 500ms linear 0ms infinite;
+    margin-right: 30px;
+}
+
+.circle:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: grow 500ms linear 0ms infinite;
+}
+
+.circle:last-child {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 0;
+    animation: grow 500ms linear 0s infinite reverse;
+}
+
+
+@keyframes grow {
+    from {
+        transform: scale(0, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
+
+@keyframes move {
+    from {
+        transform: translateX(0px)
+    }
+
+    to {
+        transform: translateX(45px)
+    }
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 17em;
+}
+
+.content {
+    width: 100%;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    padding: 1rem;
+    width: auto;
+    align-self: flex-end;
+    background-color: #666665;
+    color: #fff;
+    border-radius: .5rem;
+    text-align: end;
+}
+
+.messageOther {
+    background-color: burlywood;
+    width: auto;
+    padding: 1rem;
+    align-self: flex-start;
+    border-radius: .5rem;
+}
+
+.containerPhotoUser {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    align-self: flex-end;
+}
+
+.containerPhotoUserOther {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    align-self: flex-start;
+}
+
+.imgMessage {
+    object-fit: cover;
+    width: 3em;
+    height: 3em;
+    clip-path: circle(50% at 50% 50%);
+    margin-right: .5em;
+}
+
+.imgMessageOther {
+    width: 3em;
+    height: 3em;
+    clip-path: circle(50% at 50% 50%);
+    margin-right: .5em;
+}
+
+
+
+.send {
+    background-color: #777;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.formMessage {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.textarea {
+    resize: none;
+    margin-bottom: .5em;
+    border: none;
+}
+
+.button {
+    cursor: pointer;
 }
