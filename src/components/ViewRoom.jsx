@@ -68,21 +68,26 @@ const ViewRoom = () => {
                                 {message.userUid === user.uid 
                                     ?
                                     <div className='containerPhotoUser'>
-                                            <Avatar photoURL={ users.find((user) => user.uid === message.userUid)?.photoURL } />
-                                        <p className='userNameMessage'>{users.find((user) => user.uid === message.userUid)?.displayName}</p>
+                                        <p className={message.userUid === user.uid 
+                                            ? 'message' 
+                                            : 'messageOther' }> 
+                                            {message.message}
+                                        </p>
+                                        <Avatar 
+                                        photoURL={ users.find((user) => user.uid === message.userUid)?.photoURL }/>
                                     </div>
                                     :
                                     <div className='containerPhotoUserOther'>
-                                            <Avatar photoURL={ users.find((user) => user.uid === message.userUid)?.photoURL } />
-                                        <p className='userNameMessageOther'>{users.find((user) => user.uid === message.userUid)?.displayName} </p>
+                                        <Avatar 
+                                                photoURL={ users.find((user) => user.uid === message.userUid)?.photoURL }/>
+                                            <p className={message.userUid === user.uid 
+                                                ? 'message' 
+                                                : 'messageOther' }> 
+                                                {message.message}
+                                            </p>    
                                     </div>
                                 }
-                                    <p 
-                                        className={message.userUid === user.uid 
-                                            ? 'message' 
-                                            : 'messageOther' }> 
-                                        {message.message} 
-                                    </p>
+                                    
                             </article>
                         )
                     })                        
