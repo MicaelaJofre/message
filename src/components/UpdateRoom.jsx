@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faBook } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from "../context/AuthContext";
+import { useRoom } from "../context/RoomContext";
 import { Alert } from './Alert';
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -13,7 +13,7 @@ const UpdateRoom = () => {
     const [error, setError] = useState()
     
 
-    const { updateRoom, deleteRoom } = useAuth();
+    const { updateRoom, deleteRoom } = useRoom();
 
     const handleChange = ({ target: { name, value } }) => setUser({ ...user, [name]: value })
 

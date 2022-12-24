@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useAuth } from "../context/AuthContext";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate } from "react-router-dom";
-import { Alert } from './Alert';
+import React, { useState } from 'react'
+import { useAuth } from "../context/AuthContext"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faLock, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { Link, useNavigate } from "react-router-dom"
+import { Alert } from './Alert'
 
 const Login = () => {
     
@@ -46,67 +46,64 @@ const Login = () => {
 
 
     return (
-        <div className='hero is-fullheight has-background-light backgrounApp'>
-            <section className='hero-body is-flex is-justify-content-center'>
-                <form className="has-background-white p-5 box" onSubmit={handleSubmit}>
-                    <div className="field">
-                        <p className="control has-icons-left has-icons-right">
+        <div className='heroLoginSingUpReset'>
+            <section className='bodyLoginSingUpReset'>
+                <form className="formLoginSingUpReset" onSubmit={handleSubmit}>
+                    <div className="fieldLoginSingUpReset">
+                        <p className="controlLoginSingUpReset">
                             <input
-                                className="input"
+                                className="inputLoginSingUpReset"
                                 type="email"
                                 name='email'
                                 id='email'
                                 placeholder="Email"
-                                onChange={handleChange} />
-                            <span className="icon is-small is-left">
+                                onChange={handleChange}/>  
+                            <span className="iconLeft">
                                 <FontAwesomeIcon icon={faEnvelope} />
-                            </span>
-                            <span className="icon is-small is-right">
-                                <FontAwesomeIcon icon={faCheck} />
-                            </span>
+                            </span>                        
                         </p>
                     </div>
-                    <div className="field">
-                        <p className="control has-icons-left">
+                    <div className="fieldLoginSingUpReset">
+                        <p className="controlLoginSingUpReset">
                             <input
-                                className="input"
+                                className="inputLoginSingUpReset"
                                 type="password"
                                 name='password'
                                 id='password'
                                 placeholder="Password"
                                 onChange={handleChange} />
-                            <span className="icon is-small is-left">
+                            <span className="iconLeft">
                                 <FontAwesomeIcon icon={faLock} />
                             </span>
                         </p>
                     </div>
-                    <div className="field">
+                    <div className={ error && "notificationAlert"}>
                         {error && <Alert message={error} />}
                     </div>
-                    <div className="field">
-                        <p className="control ">
+                    <div className="fieldLoginSingUpReset">
+                        <p className="controlLoginSingUpReset">
                             <button
                                 className=
                                 {(!error && loading)
-                                    ? "button is-success is-medium is-fullwidth mb-2 is-loading"
-                                    : "button is-success is-medium is-fullwidth mb-2 "}>
+                                    ? "buttonLoginSingUpReset"
+                                    : "buttonLoginSingUpReset"}>
                                 Login
                             </button>
                             <button
                                 onClick={handleGoogle}
                                 className=
                                 {(!error && loading)
-                                    ? "button is-danger is-medium is-fullwidth is-loading"
-                                    : "button is-danger is-medium is-fullwidth"}>
+                                    ? "buttonLoginGoogle"
+                                    : "buttonLoginGoogle"}>
                                 Login whith Google 🚀
                             </button>
                         </p>
                     </div>
-                    <div className="field">
-                        <p className ="control ">You do not have an account<Link to='/singUp'> SingUp</Link></p>
+                    <div className="containerLink">
+                        <p className ="linkLoginSingUp">You do not have an account<Link to='/singUp'> SingUp</Link></p>
                     </div>
-                    <div className="field has-text-centered">
-                        <p className="control "><Link to='/resetPassword'> Forgot Password?</Link></p>
+                    <div className="containerLinkLogin">
+                        <p className="linkLoginresetPassword"><Link to='/resetPassword'> Forgot Password?</Link></p>
                     </div>
                 </form>
             </section>

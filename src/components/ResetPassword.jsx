@@ -34,43 +34,40 @@ const ResetPassword = () => {
 
 
     return (
-        <div className='hero is-fullheight has-background-light backgrounApp'>
-            <section className='hero-body is-flex is-justify-content-center'>
-                <form className="has-background-white p-5 box">
-                    <div className="field">
-                        <p className="control has-icons-left has-icons-right">
+        <div className='heroLoginSingUpReset'>
+            <section className='bodyLoginSingUpReset'>
+                <form className="formLoginSingUpReset">
+                    <div className="fieldLoginSingUpReset">
+                        <p className="controlLoginSingUpReset">
                             <input
-                                className="input"
+                                className="inputLoginSingUpReset"
                                 type="email"
                                 name='email'
                                 id='email'
                                 placeholder="Email"
                                 onChange={handleChange} />
-                            <span className="icon is-small is-left">
+                            <span className="iconLeft">
                                 <FontAwesomeIcon icon={faEnvelope} />
-                            </span>
-                            <span className="icon is-small is-right">
-                                <FontAwesomeIcon icon={faCheck} />
                             </span>
                         </p>
                     </div>
-                    <div className="field">
+                    <div className={ error && "notificationAlert"}>
                         {error && <Alert message={error} />}
                     </div>
-                    <div className="field">
-                        <p className="control ">
+                    <div className="fieldLoginSingUpReset">
+                        <p className="controlLoginSingUpReset">
                             <button
                                 onClick={handleResetPassword}
                                 className=
                                 {(!error && loading)
-                                    ? "button is-success is-medium is-fullwidth mb-2 is-loading"
-                                    : "button is-success is-medium is-fullwidth mb-2 "}>
+                                    ? "buttonLoginSingUpReset"
+                                    : "buttonLoginSingUpReset"}>
                                 Send
                             </button>
                         </p>
                     </div>
-                    <div className="field">
-                        <p className="control ">
+                    <div className="containerLinkReturn">
+                        <p className="linkReturn">
                             <Link to='/login'>⏪ Return</Link>
                         </p>
                     </div>

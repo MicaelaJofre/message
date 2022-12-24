@@ -38,55 +38,52 @@ const SingUp = () => {
 
 
     return (
-        <div className='hero is-fullheight has-background-light backgrounApp'>
-            <section className='hero-body is-flex is-justify-content-center'>
-                <form className="has-background-white p-5 box" onSubmit={handleSubmit}>
-                    <div className="field">
-                        <p className="control has-icons-left has-icons-right">
+        <div className='heroLoginSingUpReset'>
+            <section className='bodyLoginSingUpReset'>
+                <form className="formLoginSingUpReset" onSubmit={handleSubmit}>
+                    <div className="fieldLoginSingUpReset">
+                        <p className="controlLoginSingUpReset">
                             <input
-                                className="input"
+                                className="inputLoginSingUpReset"
                                 type="email"
                                 name='email'
                                 id='email'
                                 placeholder="Email"
                                 onChange={handleChange} />
-                            <span className="icon is-small is-left">
+                            <span className="iconLeft">
                                 <FontAwesomeIcon icon={faEnvelope} />
-                            </span>
-                            <span className="icon is-small is-right">
-                                <FontAwesomeIcon icon={faCheck} />
                             </span>
                         </p>
                     </div>
-                    <div className="field">
-                        <p className="control has-icons-left">
+                    <div className="fieldLoginSingUpReset">
+                        <p className="controlLoginSingUpReset">
                             <input
-                                className="input"
+                                className="inputLoginSingUpReset"
                                 type="password"
                                 name='password'
                                 id='password'
                                 placeholder="Password"
                                 onChange={handleChange} />
-                            <span className="icon is-small is-left">
+                            <span className="iconLeft">
                                 <FontAwesomeIcon icon={faLock} />
                             </span>
                         </p>
                     </div>
-                    <div className="field">
+                    <div className={ error && "notificationAlert"}>
                         {error && <Alert message={error} />}
                     </div>
-                    <div className="field">
-                        <p className="control ">
+                    <div className="fieldLoginSingUpReset">
+                        <p className="controlLoginSingUpReset">
                             <button
                                 className=
                                 {(!error && loading)
-                                    ? "button is-success is-medium is-fullwidth mb-2 is-loading"
-                                    : "button is-success is-medium is-fullwidth mb-2 "}>Singup
+                                    ? "buttonLoginSingUpReset"
+                                    : "buttonLoginSingUpReset"}>Singup
                             </button>
                         </p>
                     </div>
-                    <div className="field">
-                        <p class="control ">Do you already have an account <Link to='/login'>Login</Link></p>
+                    <div className="containerLinkSingUp">
+                        <p class="linkReturn">Do you already have an account <Link to='/login'>Login</Link></p>
                     </div>
                 </form>
             </section>

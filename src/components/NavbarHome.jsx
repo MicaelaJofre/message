@@ -1,38 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from "../context/AuthContext";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useAuth } from "../context/AuthContext"
 
-const NavbarHome = ({ handleLogaut }) => {
-
-    const { user } = useAuth();
+const NavbarHome = () => {
+    const { logout, user } = useAuth()
 
     return (
-        <>
-            <ul className="menu-list is-flex is-align-items-flex-center ">
-                <li className="m-1">
-                    <button
-                        onClick={handleLogaut}
-                        className="button is-normal has-text-weight-bold buttonHome">
-                        SingOut
-                    </button>
-                </li>
-                <li className="m-1">
-                    <Link to='/rooms'
-                        className="button is-normal has-text-weight-bold buttonHome">
-                        Create Room
-                    </Link>
-                </li>
-            </ul>
-            <ul className="menu-list is-flex is-align-items-flex-start">
-                <li className="is-align-self-center has-text-white">Hola
-                    <span className="has-text-weight-bold"> {user.displayName || user.email} </span>
-                </li>
-                {
-                    user.photoURL
-                    && <li className="photoUser ml-2 "><img src={user.photoURL} alt="usuario" /></li>
-                }
-            </ul>
-        </>
+        user ? (
+            <aside className="menu">
+                <Link to='/'
+                    className="imgMenu">
+                    <img className='imgLogo' src="../img/ring.png" alt="logo"/>
+                </Link>
+                <ul className="menuList">
+                    <li className="menuListButon">
+                        <button
+                            onClick={() => logout()}
+                            className="buttonSingUpMenu">
+                            SingOut
+                        </button>
+                    </li>
+                    <li className="menuListButon">
+                        <Link to='/rooms'
+                            className="buttonCreateRoom">
+                            Create Room
+                        </Link>
+                    </li>
+                </ul>
+                <ul className="menuListUser">
+                    <li>
+                        Hola
+                        <span className="nameUser"> {user.displayName || user.email}! </span>
+                    </li>
+                    {
+                        user.photoURL
+                        && <li>
+                            <img className='photoUser' src={user.photoURL || ''} referrerpolicy="no-referrer" alt="usuario" />
+                            </li>
+                    }
+                </ul>
+            </aside>
+        ) :
+            null
     )
 }
 

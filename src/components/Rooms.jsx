@@ -1,16 +1,16 @@
-import React, { useState} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faBook } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from "../context/AuthContext";
+import React, { useState} from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faBook } from '@fortawesome/free-solid-svg-icons'
+import { useRoom } from "../context/RoomContext"
 import { Alert } from './Alert';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"
 
 const Rooms = () => {
 
     const [user, setUser] = useState({ name: "", description: "" })
     const [error, setError] = useState()
 
-    const { createRoom } = useAuth();
+    const { createRoom } = useRoom();
 
 
     const handleChange = ({ target: { name, value } }) => setUser({ ...user, [name]: value })
@@ -37,62 +37,57 @@ const Rooms = () => {
         } 
     }
     return (
-        <div className='hero is-fullheight has-background-light backgrounApp'>
-            <div className='hero is-small is-primary'>
-                <div className="hero-body">
-                    <h2 className="title has-text-centered">Create Room</h2>
-                </div>
+        <div className='heroCreateRoom'>
+            <div className="createRoomTitle">
+                    <h2 className="titleCreate">Create Room</h2>
             </div>
-            <section className='hero-body is-flex is-justify-content-center'>
-                
-                <form className="has-background-white p-5 box" onSubmit={setCreateRoom}>
-                    <div className="field">
-                        <label className='label'>Name</label>
-                        <p className="control has-icons-left has-icons-right">
+            <section className='bodyCreateRoom'>
+                <form className="formCreateRoom" onSubmit={setCreateRoom}>
+                    <div className="fieldCreateRoom">
+                        <label className='labelCreateRoom'>Name</label>
+                        <p className="controlCreateRoom">
                             <input
-                                className="input"
+                                className="inputCreateRoom"
                                 type="text"
                                 name='name'
                                 id='nameRoom'
-                                placeholder="Loco por los gatos 😻"
+                                placeholder="Crazy for cats 😻"
                                 onChange={handleChange}/>
-                            <span className="icon is-small is-left">
+                            <span className="iconLeft">
                                 <FontAwesomeIcon icon={faPen} />
                             </span>
                             
                         </p>
                     </div>
-                    <div className="field">
-                        <label className='label'>Desciption</label>
-                        <p className="control has-icons-left">
+                    <div className="fieldCreateRoom">
+                        <label className='labelCreateRoom'>Desciption</label>
+                        <p className="controlCreateRoom">
                             <input
-                                className="input"
+                                className="inputCreateRoom"
                                 type="textarea"
                                 name='description'
                                 id='description'
-                                placeholder="Soy un loco apasionado ..."
+                                placeholder="Chat exclusively for fans..."
                                 onChange={handleChange}/>
-                            <span className="icon is-small is-left">
+                            <span className="iconLeft">
                                 <FontAwesomeIcon icon={faBook} />
                             </span>
                         </p>
                     </div>
-                    <div className="field">
+                    <div className={ error && "notificationAlert"}>
                         {error && <Alert message={error} />}
                     </div>
-                    <div className="field">
-                        <p className="control ">
+                    <div className="fieldCreateRoom">
+                        <p className="controlCreateRoom ">
                             <button
-                                className="button is-success is-medium is-fullwidth "
+                                className="buttonRoom"
                                 type='submit'>
                                 Create
                             </button>
                         </p>
                     </div>
-                    <div className="field">
-                        <div className="field">
-                            <p className="control ">You want to go home<Link to='/'> Home</Link></p>
-                        </div>
+                    <div className="containerLinkCreateRoom">
+                        <p className="linkCreateRoom">You want to go home<Link to='/'> Home</Link></p>
                     </div>
                 </form>
             </section>

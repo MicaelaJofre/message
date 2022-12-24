@@ -1,147 +1,468 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
 .backgrounApp {
     background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
         url(../../public/img/gatos.jpg);
     background-position: center;
     background-size: contain;
+    height: auto;
+    width: 100%;
+}
+
+.notificationAlert {
+    background-color: #e79fae86;
+    color: #fff;
+    border: none;
+    margin-bottom: 8px;
+    padding: 12px 20px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: .9em;
+    text-align: center;
+}
+
+/**login**/
+.heroLoginSingUpReset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
 }
 
-.backgrounApp-active {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
-        url(../../public/img/gatos.jpg);
-    background-position: center;
-    background-size: contain;
-    height: auto;
-}
-
-.menu-list li {
-    list-style: none;
-}
-
-.photoUser {
-    width: 3em;
-    height: 3em;
-    clip-path: circle(50% at 50% 50%);
-}
-
-.buttonHome {
+.bodyLoginSingUpReset {
     background-color: #fff;
-    color: #777;
-    border: none;
+    padding: 1.5em;
+    border-radius: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    min-width: 18em;
 }
 
-.card {
-    width: 20em;
-    height: 28em;
-}
-
-.description {
-    overflow-y: scroll;
-    height: 3em;
-    scrollbar-width: thin;
-    scrollbar-color: #00d1b2 white;
-}
-
-/* Works on Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-    width: 12px;
-}
-
-*::-webkit-scrollbar-track {
-    background: white;
-}
-
-*::-webkit-scrollbar-thumb {
-    background-color: #00d1b2;
-    border-radius: 20px;
-    border: 3px solid white;
-}
-
-/** message* */
-.columns {
-    width: 50vw;
-    justify-content: center;
-}
-
-.infoMessage {
+.formLoginSingUpReset {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: #00d1b2;
-    padding: .5em;
-    position: fixed;
-    z-index: 10;
+}
+
+.fieldLoginSingUpReset {
     width: 100%;
+    margin-bottom: 1em;
 }
 
-.photoUser {
-    width: 3em;
-    height: 3em;
-    clip-path: circle(50% at 50% 50%);
+.inputLoginSingUpReset {
+    width: 100%;
+    padding: 1em .5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1em;
+    cursor: pointer;
 }
 
-.titleMessage {
-    padding-left: 1rem;
-    font-weight: 600;
+.inputLoginSingUpReset::placeholder {
+    color: #ccc;
+}
+
+.controlLoginSingUpReset {
+    position: relative;
+}
+
+.iconLeft {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    /* color: #00d1b2; */
+    color: rgb(196, 193, 193);
+    cursor: pointer;
+}
+
+.buttonLoginSingUpReset {
+    background-color: #3ec487;
+    color: #fff;
+    border: none;
+    margin-bottom: 8px;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonLoginSingUpReset:hover {
+    background-color: #68c99d;
+    scale: 1.1;
+}
+
+.buttonLoginGoogle {
+    background-color: #f03a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonLoginGoogle:hover {
+    background-color: #f56c87;
+    scale: 1.1;
+}
+
+.containerLinkLogin,
+.containerLinkReturn,
+.containerLinkSingUp {
+    color: rgb(105, 105, 105);
+    line-height: 1.5em;
+}
+
+.linkLoginSingUp a,
+.linkReturn a {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(116, 107, 252);
+    font-size: 1em;
+}
+
+
+.linkLoginresetPassword a {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(116, 107, 252);
+    font-size: 1em;
+}
+
+
+/*navbar*/
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5c5c5c;
     color: #fff;
 }
 
-.circle {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
+
+.imgLogo {
+    width: 4em;
+    height: auto;
+    margin-left: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.menuList,
+.menuListUser {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 20em;
+    margin-right: 1em;
+    list-style: none;
+}
+
+.menuListUser {
+    justify-content: space-evenly;
+}
+
+.menuListButon {
+    text-decoration: none;
+}
+
+.buttonSingUpMenu,
+.buttonCreateRoom {
+    background-color: #3ec487;
+    color: #fff;
+    border: none;
+    margin-right: 1em;
+    padding: 9px 20px;
+    border-radius: 5px;
+    font-size: .9em;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+}
+
+.buttonSingUpMenu:hover {
+    background-color: #68c99d;
+}
+
+.buttonCreateRoom:hover {
+    background-color: #68c99d;
+}
+
+.nameUser {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.photoUser,
+.imgMessage {
+    width: 3em;
+    height: 3em;
+    clip-path: circle(50% at 50% 50%);
+    margin-left: 1em;
+}
+
+/*home*/
+
+.titleHome {
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: center;
+    color: #fff;
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+.contentListHome {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 2em 1em;
+    gap: 1em;
+    padding-bottom: 5em;
+    margin: 0;
+}
+
+/*ListRoom*/
+
+.containerCard {
     background-color: #fff;
-    animation: move 500ms linear 0ms infinite;
-    margin-right: 30px;
+    padding: 3px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    min-height: 399px;
 }
 
-.circle:first-child {
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: grow 500ms linear 0ms infinite;
+.containerCard a {
+    text-decoration: none;
 }
 
-.circle:last-child {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 0;
-    animation: grow 500ms linear 0s infinite reverse;
+.imgListRoom {
+    width: 15em;
+}
+
+.contentCard {
+    padding: 1em;
+}
+
+.cardTitle {
+    font-weight: 600;
+    color: #5c5c5c;
+    padding-bottom: .7em;
+    line-height: 1.3em;
+
+}
+
+.adminCardRoom::first-letter {
+    text-transform: uppercase;
+}
+
+.titleRoom {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.adminCardRoom {
+    font-size: .9em;
+    font-style: italic;
+}
+
+.cardDescription {
+    font-size: .9em;
+    color: #5c5c5c;
+    margin-bottom: .5em;
+}
+
+.containerButtonRoom {
+    margin: .7em;
+    text-align: end;
+}
+
+.cardButton {
+    background-color: #3ec487;
+    padding: 5px 20px;
+    border-radius: 5px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: .9em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.cardButton:hover {
+    background-color: #68c99d;
+    scale: 1.1;
+}
+
+/*createRoom*/
+
+.heroCreateRoom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
+    height: 100vh;
 }
 
 
-@keyframes grow {
-    from {
-        transform: scale(0, 0);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1, 1);
-        opacity: 1;
-    }
+.bodyCreateRoom {
+    background-color: #fff;
+    padding: 1.5em;
+    border-radius: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    min-width: 18em;
 }
 
-@keyframes move {
-    from {
-        transform: translateX(0px)
-    }
-
-    to {
-        transform: translateX(45px)
-    }
+.titleCreate {
+    font-size: 2.5em;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+    text-shadow: black 0.1em 0.1em 0.2em;
 }
 
-.section {
+.formCreateRoom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fieldCreateRoom {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.inputCreateRoom {
+    width: 100%;
+    padding: 1em .5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.inputCreateRoom::placeholder {
+    color: #ccc;
+}
+
+.controlCreateRoom {
+    position: relative;
+}
+
+.labelCreateRoom {
+    color: #5c5c5c;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.buttonRoom {
+    background-color: #3ec487;
+    color: #fff;
+    border: none;
+    margin-bottom: 8px;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.25em;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 17em;
 }
 
-.content {
-    width: 100%;
+.buttonRoom:hover {
+    background-color: #68c99d;
+    scale: 1.1;
 }
+
+.containerLinkCreateRoom {
+    color: rgb(105, 105, 105);
+    line-height: 1.5em;
+}
+
+.linkCreateRoom a {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(116, 107, 252);
+    font-size: 1em;
+}
+
+
+/*viewRoom*/
+
+.roomName {
+    width: 100%;
+    background-color: #00d1b2;
+    text-align: center;
+    color: #fff;
+    padding: .5em;
+    font-size: .9em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.messageContainer {
+    margin-bottom: 4.5em;
+}
+
+.contentUserMessage {
+    padding: 1em;
+    padding-bottom: 3em;
+}
+
+.containerPhotoUser,
+.containerPhotoUserOther {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    align-self: flex-end;
+    background-color: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    margin-bottom: .5em;
+    margin-top: 4em;
+}
+
+.containerPhotoUserOther {
+    align-self: flex-start;
+}
+
+.userNameMessageOther,
+.userNameMessage {
+    padding: 1em;
+    font-weight: 600;
+    color: #5c5c5c;
+}
+
+
+.imgMessage,
+.imgMessageOther {
+    object-fit: cover;
+    width: 3em;
+    height: 3em;
+    clip-path: circle(50% at 50% 50%);
+    margin-right: 1em;
+    text-align: center;
+}
+
 
 .messages {
     display: flex;
@@ -152,7 +473,7 @@
     padding: 1rem;
     width: auto;
     align-self: flex-end;
-    background-color: #666665;
+    background-color: #3ec487;
     color: #fff;
     border-radius: .5rem;
     text-align: end;
@@ -166,39 +487,9 @@
     border-radius: .5rem;
 }
 
-.containerPhotoUser {
-    display: flex;
-    align-items: center;
-    padding: .5rem;
-    align-self: flex-end;
-}
-
-.containerPhotoUserOther {
-    display: flex;
-    align-items: center;
-    padding: .5rem;
-    align-self: flex-start;
-}
-
-.imgMessage {
-    object-fit: cover;
-    width: 3em;
-    height: 3em;
-    clip-path: circle(50% at 50% 50%);
-    margin-right: .5em;
-}
-
-.imgMessageOther {
-    width: 3em;
-    height: 3em;
-    clip-path: circle(50% at 50% 50%);
-    margin-right: .5em;
-}
-
-
 
 .send {
-    background-color: #777;
+    background-color: #5c5c5c;
     padding: 1rem;
     position: fixed;
     bottom: 0;
@@ -209,16 +500,98 @@
 .formMessage {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
+.controlTextarea {
+    width: 80%;
+}
 
 .textarea {
     resize: none;
-    margin-bottom: .5em;
     border: none;
+    border-radius: 5px;
+    padding: .5em;
+    width: 100%;
+    margin-bottom: .5em;
 }
 
-.button {
-    cursor: pointer;
+.textarea::placeholder {
+    color: #ccc;
+}
+
+.textarea:focus {
+    outline: none;
+}
+
+.controlButtonViewRoom {
+    margin-bottom: .8em;
+    margin-left: .5em;
+}
+
+.buttonViewRoom {
+    padding: 1em 2em;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    background-color: #3ec487;
+    color: #fff;
+    font-weight: 600;
+}
+
+.buttonViewRoom:hover {
+    background-color: #68c99d;
+    scale: 1.1;
+}
+
+
+/*media query*/
+
+@media screen and (max-width: 600px) {
+
+    /*navbar*/
+    .menu {
+        padding: .5em 0;
+    }
+
+    .imgLogo {
+        width: 4em;
+    }
+
+    .buttonSingUpMenu,
+    .buttonCreateRoom {
+        padding: 5px 15px;
+        font-size: .8em;
+    }
+
+    .buttonSingUpMenu:hover {
+        background-color: #68c99d;
+        scale: 1.1;
+    }
+
+    .buttonCreateRoom:hover {
+        background-color: #68c99d;
+        scale: 1.1;
+    }
+
+    .menuList {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+        margin: 0;
+    }
+
+    .menuListUser {
+        display: none;
+    }
+
+    .menuListUser li {
+        font-size: .8em;
+    }
+
+    /*home*/
+    .titleHome {
+        font-size: 1.5em;
+    }
+
 }

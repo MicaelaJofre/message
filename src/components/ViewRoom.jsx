@@ -1,53 +1,50 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from "../context/AuthContext"
-import { Alert } from './Alert';
+import { useRoom } from '../context/RoomContext'
+import { useMessage } from '../context/MessageContext'
+import { Alert } from './Alert'
 import { useLocation } from "react-router-dom"
-import Avatar from './Avatar';
+import Avatar from './Avatar'
+import { NavbarHome } from './NavbarHome'
 
 const ViewRoom = () => {
-
     const location = useLocation()
 
     const [error, setError] = useState()
     const [message, setMessage] = useState('')
     
-    const { 
-        getMessages, 
-        setMessagesListener, 
-        createMessages, 
-        messages, 
-        user,
-        users
-    } = useAuth()
+    const { user, users } = useAuth()
+    const { room } = useRoom()
+
+    const { getMessages, createMessages,  messages } = useMessage()
 
     useEffect(() => {
         getMessages(location.state)
-        //deja de leer los mensajes al desmontarse el componente
-        return setMessagesListener(null)
-    }, [])  
+    }, [location.state])  
     
+    useEffect(() => {
+        if (!messages.length === 0) return
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        }) 
+    }, [messages])
+
+
+
 
     const createMessage = async (e) => {
         e.preventDefault()
         setError('')
         
-
         try {
-
             if (!location.state) throw new Error('Could not find room')
 
             await createMessages(location.state, message)
             await getMessages(location.state)
             setError('Message created')
-
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-            }) 
             
             setMessage('')
-
-
         } catch (error) {
             console.log(error.message);
             setError(error.message)
@@ -57,74 +54,56 @@ const ViewRoom = () => {
 
 
     return (
-        <div>
-            {!user 
-                ? <div className="infoMessage">
-                    <div className="container">
-                    <span className="circle"></span>
-                    <span className="circle"></span>
-                    <span className="circle"></span>
-                    <span className="circle"></span>
-                    </div>
-                </div>
-                : user.photoURL
-                    ? <div className='infoMessage'>
-                        <img className='photoUser' src={user.photoURL } alt="usuario" />
-                        <h1 className='titleMessage has-text-centered'>{user.displayName || user.email}</h1>
-                    </div>
-                    : <div className='infoMessage'>
-                        <img className='photoUser' src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" alt="usuario"/>
-                        <h1 className='titleMessage has-text-centered'>{user.displayName || user.email}</h1>
-                    </div>        
-            }               
-            <article className='section'>
-            <div className="content">
-                <>
-                    {
-                        messages?.map(message => {
-                            return (
-                                <article className='messages' key={message.id}>
+        <div className='messageContainer'>
+            <NavbarHome />
+            <div className="roomName">
+                <span>Room  </span>
+                <span>"{room && room.find((room) => room.id === location.state)?.name}"</span>
+            </div>
+            <article className='contentUserMessage'>
+                {
+                    messages?.map(message => {
+                        return (
+                            <article className='messages' key={message.id}>
                                 {message.userUid === user.uid 
                                     ?
-                                        <div className='containerPhotoUser'>
+                                    <div className='containerPhotoUser'>
                                             <Avatar photoURL={ users.find((user) => user.uid === message.userUid)?.photoURL } />
-                                        <p>{users.find((user) => user.uid === message.userUid)?.displayName}</p>
+                                        <p className='userNameMessage'>{users.find((user) => user.uid === message.userUid)?.displayName}</p>
                                     </div>
                                     :
-                                        <div className='containerPhotoUserOther'>
+                                    <div className='containerPhotoUserOther'>
                                             <Avatar photoURL={ users.find((user) => user.uid === message.userUid)?.photoURL } />
-                                        <p>{users.find((user) => user.uid === message.userUid)?.displayName}</p>
+                                        <p className='userNameMessageOther'>{users.find((user) => user.uid === message.userUid)?.displayName} </p>
                                     </div>
                                 }
-                                <p 
-                                className={message.userUid === user.uid 
-                                    ? 'message' 
-                                    : 'messageOther' }> 
-                                {message.message} 
-                                </p>
-                                </article>
-                            )
-                        })                
-                    }            
-                </>        
-            </div>
+                                    <p 
+                                        className={message.userUid === user.uid 
+                                            ? 'message' 
+                                            : 'messageOther' }> 
+                                        {message.message} 
+                                    </p>
+                            </article>
+                        )
+                    })                        
+                }   
             </article>
             <section className='send'>
                 <form action="" className='formMessage' onSubmit={createMessage}>
-                    <div className="control">
+                    <div className="controlTextarea">
                         <textarea
                             name="message"
                             id="message"
-                            className='textarea form_textarea'
+                            className='textarea'
                             placeholder='Write your message here..'
                             value={message}
                             onChange={({ target }) => setMessage(target.value)}>
                         </textarea>
                     </div>
-                    <div className="control">
+                    <div className="controlButtonViewRoom">
                         <button
                             type='submit'
-                            className='button is-normal has-text-weight-bold buttonHome'>
+                            className='buttonViewRoom'>
                             Send
                         </button>
                     </div>
