@@ -11,6 +11,7 @@ const UpdateRoom = () => {
 
     const [user, setUser] = useState({ name: "", description: "" })
     const [error, setError] = useState()
+    const [notification, setNotifiation] = useState()
     
 
     const { updateRoom, deleteRoom } = useRoom();
@@ -26,7 +27,7 @@ const UpdateRoom = () => {
         try {
 
             if (!location.state) throw new Error('Could not find room')
-            setError('Room edition')
+            setNotifiation('Room edition')
 
             await updateRoom(location.state, user.name, user.description)
             setUser({ name: '', description: '' })
@@ -74,7 +75,6 @@ const UpdateRoom = () => {
                             <span className="iconLeft">
                                 <FontAwesomeIcon icon={faPen} />
                             </span>
-
                         </p>
                     </div>
                     <div className="fieldEditRoom">
@@ -91,8 +91,13 @@ const UpdateRoom = () => {
                             </span>
                         </p>
                     </div>
-                    <div className={ error && "notificationAlert"}>
-                        {error && <Alert message={error} />}
+                    <div>
+                        <div className={ error && "notificationAlert"}>
+                            {error && <Alert message={error} />}    
+                        </div>
+                        <div className={ notification && "notificationAlertOk"}>
+                            {notification && <Alert message={notification} />}
+                        </div>
                     </div>
                     <div className="fieldEditRoom">
                         <p className="controlEditRoom">
@@ -101,6 +106,7 @@ const UpdateRoom = () => {
                                 type='submit'>
                                 Update
                             </button>
+                        </p>    
                         <p className="controlEditRoom">
                             <button
                                 className="buttonEditDelete"
@@ -109,7 +115,6 @@ const UpdateRoom = () => {
                                 onClick={deleteRooms}>
                                 Delete
                             </button>    
-                        </p>
                         </p>
                     </div>
                 </form>

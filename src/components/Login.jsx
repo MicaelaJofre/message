@@ -26,6 +26,7 @@ const Login = () => {
             navigate("/")
 
         } catch (error) {
+            setLoading(false)
             error.code === 'auth/wrong-password' && setError('Password invalid')
             error.code === 'auth/user-not-found' && setError('User invalid')
             error.code === 'auth/invalid-email' && setError('Complete the form')
@@ -39,6 +40,7 @@ const Login = () => {
             await loginGoogle()
             navigate("/")
         } catch (error) {
+            setLoading(false)
             setError("Can't connect with your gmail user")
         }
     }
@@ -82,20 +84,49 @@ const Login = () => {
                     </div>
                     <div className="fieldLoginSingUpReset">
                         <p className="controlLoginSingUpReset">
-                            <button
-                                className=
-                                {(!error && loading)
-                                    ? "buttonLoginSingUpReset"
-                                    : "buttonLoginSingUpReset"}>
-                                Login
+                        <button
+                                className="buttonLoginSingUpReset">
+                                {
+                                    loading
+                                    ?
+                                    <>
+                                        <p className='loading'>L</p>
+                                        <p className='loading'>o</p>
+                                        <p className='loading'>g</p>
+                                        <p className='loading'>i</p>
+                                        <p className='loading'>n</p>
+                                    </>
+                                    : 
+                                    <p>Login</p>
+                                }
                             </button>
                             <button
                                 onClick={handleGoogle}
-                                className=
-                                {(!error && loading)
-                                    ? "buttonLoginGoogle"
-                                    : "buttonLoginGoogle"}>
-                                Login whith Google 🚀
+                                className= "buttonLoginGoogle">
+                                {
+                                    loading 
+                                    ? <>
+                                    <p className='loading'>L</p>
+                                    <p className='loading'>o</p>
+                                    <p className='loading'>g</p>
+                                    <p className='loading'>i</p>
+                                    <p className='loading'>n </p>
+                                    <p className='loading'>w</p>
+                                    <p className='loading'>h</p>
+                                    <p className='loading'>i</p>
+                                    <p className='loading'>t</p>
+                                    <p className='loading'>h </p>
+                                    <p className='loading'>G</p>
+                                    <p className='loading'>o</p>
+                                    <p className='loading'>o</p>
+                                    <p className='loading'>g</p>
+                                    <p className='loading'>l</p>
+                                    <p className='loading'>e</p>
+                                    <p className='loading'> 🚀</p>
+                                    </>
+                                    : 
+                                    <p>Login whith Google 🚀</p>
+                                }                                
                             </button>
                         </p>
                     </div>

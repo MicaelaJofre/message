@@ -14,19 +14,25 @@
     width: 100%;
 }
 
-.notificationAlert {
+.notificationAlert,
+.notificationAlertOk {
     background-color: #e79fae86;
-    color: #fff;
+    color: #918b8b;
     border: none;
     margin-bottom: 8px;
     padding: 12px 20px;
     border-radius: 5px;
     width: 100%;
     font-size: .9em;
+    font-weight: 600;
     text-align: center;
 }
 
-/**login**/
+.notificationAlertOk {
+    background-color: #c0f1ea;
+}
+
+/**login - singUp - reset**/
 .heroLoginSingUpReset {
     display: flex;
     justify-content: center;
@@ -76,7 +82,6 @@
     position: absolute;
     top: 1em;
     right: 1em;
-    /* color: #00d1b2; */
     color: rgb(196, 193, 193);
     cursor: pointer;
 }
@@ -100,6 +105,10 @@
     background-color: #68c99d;
 }
 
+.buttonLoginSingUpReset:focus {
+    outline: none;
+}
+
 .buttonLoginGoogle {
     background-color: #f03a5f;
     color: #fff;
@@ -116,6 +125,10 @@
 
 .buttonLoginGoogle:hover {
     background-color: #f56c87;
+}
+
+.buttonLoginGoogle:focus {
+    outline: none;
 }
 
 .containerLinkLogin,
@@ -587,6 +600,91 @@
     background-color: #68c99d;
 }
 
+
+/*button loading */
+:root {
+    --effect: hover 1s linear infinite;
+}
+
+.loading {
+    display: inline-block;
+    transform: scale(.5);
+    color: #121212;
+    -webkit-text-stroke: 2px gray;
+}
+
+.loading:nth-child(1) {
+    animation: var(--effect);
+}
+
+.loading:nth-child(2) {
+    animation: var(--effect) .125s;
+}
+
+.loading:nth-child(3) {
+    animation: var(--effect) .25s;
+}
+
+.loading:nth-child(4) {
+    animation: var(--effect) .375s;
+}
+
+.loading:nth-child(5) {
+    animation: var(--effect) .5s;
+}
+
+.loading:nth-child(6) {
+    animation: var(--effect) .675s;
+}
+
+.loading:nth-child(7) {
+    animation: var(--effect) .75s;
+}
+
+@keyframes hover {
+    0% {
+        transform: scale(.5);
+        color: #121212;
+        -webkit-text-stroke: 2px gray;
+    }
+
+    20% {
+        transform: scale(1);
+        color: pink;
+        -webkit-text-stroke: 3px #fff;
+    }
+
+    50% {
+        transform: scale(.5);
+        color: #121212;
+        -webkit-text-stroke: 2px gray;
+    }
+
+
+}
+
+
+@keyframes grow {
+    from {
+        transform: scale(0, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
+
+@keyframes move {
+    from {
+        transform: translateX(0px)
+    }
+
+    to {
+        transform: translateX(45px)
+    }
+}
 
 /*media query*/
 

@@ -11,6 +11,7 @@ const ResetPassword = () => {
     const [user, setUser] = useState({ email: "" });
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false)
+    const [notification, setNotification] = useState()
 
 
 
@@ -25,7 +26,7 @@ const ResetPassword = () => {
 
         try {
             await resetPassword(user.email)
-            setError('We send you an email whit link to reset your password')
+            setNotification('We send you an email whit link to reset your password')
 
         } catch (error) {
             error.code === 'auth/user-not-found' && setError('Email invalid')
@@ -51,8 +52,13 @@ const ResetPassword = () => {
                             </span>
                         </p>
                     </div>
-                    <div className={ error && "notificationAlert"}>
-                        {error && <Alert message={error} />}
+                    <div>
+                        <div className={ error && "notificationAlert"}>
+                            {error && <Alert message={error} />}    
+                        </div>
+                        <div className={ notification && "notificationAlertOk"}>
+                            {notification && <Alert message={notification} />}
+                        </div>
                     </div>
                     <div className="fieldLoginSingUpReset">
                         <p className="controlLoginSingUpReset">

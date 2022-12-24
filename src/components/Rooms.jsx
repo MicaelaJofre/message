@@ -74,7 +74,7 @@ const Rooms = () => {
                             </span>
                         </p>
                     </div>
-                    <div className={ error && "notificationAlert"}>
+                    <div className={ error && "notificationAlertOk"}>
                         {error && <Alert message={error} />}
                     </div>
                     <div className="fieldCreateRoom">
