@@ -306,9 +306,10 @@
     background-color: #68c99d;
 }
 
-/*createRoom*/
+/*createRoom y editRoom*/
 
-.heroCreateRoom {
+.heroCreateRoom,
+.heroEditRoom {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -318,7 +319,8 @@
 }
 
 
-.bodyCreateRoom {
+.bodyCreateRoom,
+.bodyEditRoom {
     background-color: #fff;
     padding: 1.5em;
     border-radius: 1em;
@@ -326,7 +328,8 @@
     min-width: 18em;
 }
 
-.titleCreate {
+.titleCreate,
+.titleEdit {
     font-size: 2.5em;
     font-weight: 600;
     text-align: center;
@@ -334,19 +337,22 @@
     text-shadow: black 0.1em 0.1em 0.2em;
 }
 
-.formCreateRoom {
+.formCreateRoom,
+.formEditRoom {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.fieldCreateRoom {
+.fieldCreateRoom,
+.fieldEditRoom {
     width: 100%;
     margin-bottom: 1em;
 }
 
-.inputCreateRoom {
+.inputCreateRoom,
+.inputEditRoom {
     width: 100%;
     padding: 1em .5em;
     border: 1px solid #ccc;
@@ -360,17 +366,25 @@
     color: #ccc;
 }
 
-.controlCreateRoom {
+.inputEditRoom::placeholder {
+    color: #ccc;
+}
+
+
+.controlCreateRoom,
+.controlEditRoom {
     position: relative;
 }
 
-.labelCreateRoom {
+.labelCreateRoom,
+.labelEditRoom {
     color: #5c5c5c;
     font-size: 1em;
     font-weight: 600;
 }
 
-.buttonRoom {
+.buttonRoom,
+.buttonEditUpdate {
     background-color: #3ec487;
     color: #fff;
     border: none;
@@ -387,6 +401,28 @@
 
 .buttonRoom:hover {
     background-color: #68c99d;
+}
+
+.buttonEditUpdate:hover {
+    background-color: #68c99d;
+}
+
+.buttonEditDelete {
+    background-color: #f03a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonEditDelete:hover {
+    background-color: #f56c87;
 }
 
 .containerLinkCreateRoom {

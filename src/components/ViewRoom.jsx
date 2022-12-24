@@ -58,7 +58,7 @@ const ViewRoom = () => {
             <NavbarHome />
             <div className="roomName">
                 <span>Room  </span>
-                <span>"{room && room.find((room) => room.id === location.state)?.name}"</span>
+                <span>{room && room.find((room) => room.id === location.state)?.name}</span>
             </div>
             <article className='contentUserMessage'>
                 {

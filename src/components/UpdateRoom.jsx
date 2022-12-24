@@ -56,57 +56,54 @@ const UpdateRoom = () => {
     }
 
     return (
-        <div className='hero is-fullheight has-background-light backgrounApp'>
-            <div className='hero is-small is-primary'>
-                <div className="hero-body">
-                    <h2 className="title has-text-centered">Edit Room</h2>
-                </div>
+        <div className='heroEditRoom'>
+            <div className='editRoomTitle'>
+                <h2 className="titleEdit">Edit Room</h2>
             </div>
-            <section className='hero-body is-flex is-justify-content-center'>
-
-                <form className="has-background-white p-5 box" onSubmit={updateRooms}>
-                    <div className="field">
-                        <label className='label'>Name</label>
-                        <p className="control has-icons-left has-icons-right">
+            <section className='bodyEditRoom'>
+                <form className="formEditRoom" onSubmit={updateRooms}>
+                    <div className="fieldEditRoom">
+                        <label className='labelEditRoom'>Name</label>
+                        <p className="controlEditRoom">
                             <input
-                                className="input"
+                                className="inputEditRoom"
                                 type="text"
                                 name='name'
                                 placeholder="New name.."
                                 onChange={handleChange} />
-                            <span className="icon is-small is-left">
+                            <span className="iconLeft">
                                 <FontAwesomeIcon icon={faPen} />
                             </span>
 
                         </p>
                     </div>
-                    <div className="field">
-                        <label className='label'>Desciption</label>
-                        <p className="control has-icons-left">
+                    <div className="fieldEditRoom">
+                        <label className='labelEditRoom'>Desciption</label>
+                        <p className="controlEditRoom">
                             <input
-                                className="input"
+                                className="inputEditRoom"
                                 type="textarea"
                                 name='description'
                                 placeholder="New description ..."
                                 onChange={handleChange} />
-                            <span className="icon is-small is-left">
+                            <span className="iconLeft">
                                 <FontAwesomeIcon icon={faBook} />
                             </span>
                         </p>
                     </div>
-                    <div className="field">
+                    <div className={ error && "notificationAlert"}>
                         {error && <Alert message={error} />}
                     </div>
-                    <div className="field">
-                        <p className="content is-flex is-justify-content-space-evenly">
+                    <div className="fieldEditRoom">
+                        <p className="controlEditRoom">
                             <button
-                                className="button is-success "
+                                className="buttonEditUpdate"
                                 type='submit'>
                                 Update
                             </button>
-                        <p className="button is-danger ">
+                        <p className="controlEditRoom">
                             <button
-                                className="button is-danger "
+                                className="buttonEditDelete"
                                 type='button'
                                 name='delete'
                                 onClick={deleteRooms}>

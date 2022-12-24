@@ -39,7 +39,7 @@ const Rooms = () => {
     return (
         <div className='heroCreateRoom'>
             <div className="createRoomTitle">
-                    <h2 className="titleCreate">Create Room</h2>
+                <h2 className="titleCreate">Create Room</h2>
             </div>
             <section className='bodyCreateRoom'>
                 <form className="formCreateRoom" onSubmit={setCreateRoom}>
