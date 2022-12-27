@@ -37,12 +37,16 @@ const Login = () => {
 
     //google
     const handleGoogle = async() => {
+        setLoading(true)
         try {
             await loginGoogle()
             navigate("/")
+
         } catch (error) {
             setLoading(false)
             setError("Can't connect with your gmail user")
+        } finally {
+            setLoading(false)
         }
     }
     
