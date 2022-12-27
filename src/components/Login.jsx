@@ -26,11 +26,12 @@ const Login = () => {
             navigate("/")
 
         } catch (error) {
-            setLoading(false)
             error.code === 'auth/wrong-password' && setError('Password invalid')
             error.code === 'auth/user-not-found' && setError('User invalid')
             error.code === 'auth/invalid-email' && setError('Complete the form')
             error.code === 'auth/internal-error' && setError('Enter the password')
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -45,8 +46,6 @@ const Login = () => {
         }
     }
     
-
-
     return (
         <div className='heroLoginSingUpReset'>
             <section className='bodyLoginSingUpReset'>
@@ -84,10 +83,11 @@ const Login = () => {
                     </div>
                     <div className="fieldLoginSingUpReset">
                         <p className="controlLoginSingUpReset">
-                        <button
-                                className="buttonLoginSingUpReset">
-                                {
-                                    loading
+                        <button 
+                            className="buttonLoginSingUpReset"
+                            type='submit'>
+                            {
+                                loading
                                     ?
                                     <>
                                         <p className='loading'>L</p>
@@ -97,8 +97,8 @@ const Login = () => {
                                         <p className='loading'>n</p>
                                     </>
                                     : 
-                                    <p>Login</p>
-                                }
+                                    <p>Login</p>        
+                            }    
                             </button>
                             <button
                                 onClick={handleGoogle}

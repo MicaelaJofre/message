@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { Alert } from './Alert';
 
 const SingUp = () => {
@@ -14,9 +14,7 @@ const SingUp = () => {
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false)
     
-
     const handleChange = ({ target: { name, value } }) => setUser({ ...user, [name]: value })
-
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -32,6 +30,9 @@ const SingUp = () => {
             error.code === 'auth/invalid-email' && setError('Complete the form')
             error.code === 'auth/internal-error' && setError('Email invalid')
             error.code === 'auth/weak-password' && setError('The password must be more than 6 characters')
+
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -75,15 +76,27 @@ const SingUp = () => {
                     <div className="fieldLoginSingUpReset">
                         <p className="controlLoginSingUpReset">
                             <button
-                                className=
-                                {(!error && loading)
-                                    ? "buttonLoginSingUpReset"
-                                    : "buttonLoginSingUpReset"}>Singup
+                                className='buttonLoginSingUpReset'
+                                type='submit'>
+                                {
+                                    loading
+                                        ?
+                                        <>
+                                            <p className='loading'>S</p>
+                                            <p className='loading'>i</p>
+                                            <p className='loading'>n</p>
+                                            <p className='loading'>g</p>
+                                            <p className='loading'>U</p>
+                                            <p className='loading'>p</p>
+                                        </>
+                                        : 
+                                        <p>SingUp</p>  
+                                }
                             </button>
                         </p>
                     </div>
                     <div className="containerLinkSingUp">
-                        <p class="linkReturn">Do you already have an account <Link to='/login'>Login</Link></p>
+                        <p className="linkReturn">Do you already have an account <Link to='/login'>Login</Link></p>
                     </div>
                 </form>
             </section>

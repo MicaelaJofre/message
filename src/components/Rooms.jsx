@@ -8,6 +8,7 @@ import { useNavigate, Link } from "react-router-dom"
 const Rooms = () => {
 
     const [user, setUser] = useState({ name: "", description: "" })
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
 
     const { createRoom } = useRoom();
@@ -19,7 +20,8 @@ const Rooms = () => {
 
     const setCreateRoom = async(e) => {
         e.preventDefault()
-        
+        setError('')
+        setLoading(true)
 
         try {
             setError('Room created')
@@ -32,7 +34,7 @@ const Rooms = () => {
             }, 1000);
 
         } catch (error) {
-            console.log(error.message);
+            setLoading(false)
             setError(error.message)
         } 
     }
@@ -82,7 +84,20 @@ const Rooms = () => {
                             <button
                                 className="buttonRoom"
                                 type='submit'>
-                                Create
+                                {
+                                    loading
+                                        ?
+                                        <>
+                                            <p className='loading'>C</p>
+                                            <p className='loading'>r</p>
+                                            <p className='loading'>e</p>
+                                            <p className='loading'>a</p>
+                                            <p className='loading'>t</p>
+                                            <p className='loading'>e</p>
+                                        </>
+                                        : 
+                                        <p>Create</p>  
+                                }
                             </button>
                         </p>
                     </div>

@@ -8,29 +8,31 @@ import { useNavigate, useLocation } from "react-router-dom";
 const UpdateRoom = () => {
     //trae el id ListRoom por el Link
     const location = useLocation()
-
-    const [user, setUser] = useState({ name: "", description: "" })
+    
+    const [roomData, setRoomData] = useState({ name: "", description: "" })
     const [error, setError] = useState()
+    const [loading, setLoading] = useState(false)
     const [notification, setNotifiation] = useState()
     
 
     const { updateRoom, deleteRoom } = useRoom();
 
-    const handleChange = ({ target: { name, value } }) => setUser({ ...user, [name]: value })
+    const handleChange = ({ target: { name, value } }) => setRoomData({ ...roomData, [name]: value })
 
 
     const navigate = useNavigate()
 
     const updateRooms = async (e) => {
         e.preventDefault()
+        setError('')
+        setLoading(true)
 
         try {
-
             if (!location.state) throw new Error('Could not find room')
             setNotifiation('Room edition')
 
-            await updateRoom(location.state, user.name, user.description)
-            setUser({ name: '', description: '' })
+            await updateRoom(location.state, roomData.name, roomData.description)
+            setRoomData({ name: '', description: '' })
 
 
             setTimeout(() => {
@@ -38,12 +40,17 @@ const UpdateRoom = () => {
             }, 1000);
 
         } catch (error) {
-            console.log(error.message)
             setError(error.message)
-        } 
+
+        } finally {
+            setLoading(false)
+        }
     }
 
     const deleteRooms = async () => {
+        setError('')
+        setLoading(true)
+
         try {
             if (!location.state) throw new Error('Could not find room')
             setError('Room delete')
@@ -51,7 +58,7 @@ const UpdateRoom = () => {
             navigate("/")
 
         } catch (error) {
-            console.log(error.message)
+            setLoading(false)
             setError(error.message)
         }
     }
@@ -104,7 +111,20 @@ const UpdateRoom = () => {
                             <button
                                 className="buttonEditUpdate"
                                 type='submit'>
-                                Update
+                                {
+                                    loading
+                                        ?
+                                        <>
+                                            <p className='loading'>U</p>
+                                            <p className='loading'>p</p>
+                                            <p className='loading'>d</p>
+                                            <p className='loading'>a</p>
+                                            <p className='loading'>t</p>
+                                            <p className='loading'>e</p>
+                                        </>
+                                        : 
+                                        <p>Update</p>  
+                                }
                             </button>
                         </p>    
                         <p className="controlEditRoom">
@@ -113,7 +133,20 @@ const UpdateRoom = () => {
                                 type='button'
                                 name='delete'
                                 onClick={deleteRooms}>
-                                Delete
+                                {
+                                    loading
+                                        ?
+                                        <>
+                                            <p className='loading'>D</p>
+                                            <p className='loading'>e</p>
+                                            <p className='loading'>l</p>
+                                            <p className='loading'>e</p>
+                                            <p className='loading'>t</p>
+                                            <p className='loading'>e</p>
+                                        </>
+                                        : 
+                                        <p>Delete</p>  
+                                }
                             </button>    
                         </p>
                     </div>

@@ -7,13 +7,12 @@ export const RoomContext = createContext([]);
 export const useRoom = () => useContext(RoomContext)
 
 export const RoomProvider = ({children}) => {
-    const [room, setRoom] = useState([])
+    const [rooms, setRooms] = useState([])
     const [loading, setLoading] = useState(false)
 
     const { user } = useAuth()
 
-    useEffect(() => user ? getRooms() : setRoom([]), [user]) // eslint-disable-line
-    useEffect(() => getRooms(), [room]) // eslint-disable-line
+    useEffect(() => user ? getRooms() : setRooms([]), [user]) // eslint-disable-line
 
 
     const createRoom = (name, description) => {
@@ -29,7 +28,7 @@ export const RoomProvider = ({children}) => {
     }
 
     const getRooms = () => {
-        if(room.length > 0) return
+        if(rooms.length > 0) return
         let roomData = []
         const query = collection(db, 'Rooms')
         orderBy("createdAt", "desc")
@@ -43,17 +42,15 @@ export const RoomProvider = ({children}) => {
                     roomData.unshift(room)
                 }
                 if (change.type === "modified") {
-                    let room = change.doc.data()
-                    room.id = change.doc.id
-                    let index = change.newIndex
-                    roomData[index] = (room)
+                    let updatedRoom = change.doc.data()
+                    updatedRoom.id = change.doc.id
+                    roomData = roomData.map(r => r.id === updatedRoom.id ? updatedRoom : r)                   
                 }
-                if (change.type === "removed") {
-                    let index = change.oldIndex
-                    roomData.splice(index, 1)
+                if (change.type === "removed") {                    
+                    roomData = roomData.filter(r => r.id !== change.doc.id)
                 }
             });
-            setRoom(roomData)
+            setRooms(roomData)
             setLoading(false)
         })
     }
@@ -61,13 +58,15 @@ export const RoomProvider = ({children}) => {
     const updateRoom = async (id, name, description) => {
         const roomDate = {}
 
-        if (room.find(r => r.id === id)?.adminUid !== user.uid) throw new Error('user not valid')
+        if (rooms.find(r => r.id === id)?.adminUid !== user.uid) throw new Error('user not valid')
         if (name) roomDate.name = name
         if (description) roomDate.description = description
 
         const queryCollection = doc(db, 'Rooms', id)
+        
         try {
             await updateDoc(queryCollection, roomDate)
+
         } catch (error) {
             console.error(error.message);
         }
@@ -89,7 +88,7 @@ export const RoomProvider = ({children}) => {
 
     return (
         <RoomContext.Provider value={{
-            room,
+            room: rooms,
             createRoom,
             updateRoom,
             deleteRoom,

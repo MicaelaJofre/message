@@ -35,7 +35,7 @@ const NavbarHome = () => {
                     {
                         user.photoURL
                         && <li>
-                            <img className='photoUser' src={user.photoURL || ''} referrerpolicy="no-referrer" alt="usuario" />
+                            <img className='photoUser' src={user.photoURL || ''} referrerPolicy="no-referrer" alt="usuario" />
                             </li>
                     }
                 </ul>

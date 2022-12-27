@@ -30,9 +30,6 @@ const ViewRoom = () => {
         }) 
     }, [messages])
 
-
-
-
     const createMessage = async (e) => {
         e.preventDefault()
         setError('')
@@ -45,8 +42,8 @@ const ViewRoom = () => {
             setError('Message created')
             
             setMessage('')
+
         } catch (error) {
-            console.log(error.message);
             setError(error.message)
         } 
         

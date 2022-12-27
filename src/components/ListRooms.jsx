@@ -27,19 +27,19 @@ const ListRooms = ({ room }) => {
                 </div>    
                 </div>    
             </Link>
-                    {
-                        user.uid === room.adminUid
-                            ? <div className='containerButtonRoom'>
-                                <Link
-                                    className="cardButton"
-                                    to={{
-                                        pathname: '/updateRoom'
-                                    }}
-                                    state={room.id}
-                                >Edit</Link>
-                            </div>
-                            : null
-                    }
+            {
+                user.uid === room.adminUid
+                ? <div className='containerButtonRoom'>
+                    <Link
+                        className="cardButton"
+                        to={{
+                            pathname: '/updateRoom'
+                        }}
+                        state={room.id}
+                    >Edit</Link>
+                </div>
+                : null        
+            }        
             
         </div>
 

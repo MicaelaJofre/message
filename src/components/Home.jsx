@@ -6,6 +6,7 @@ import '../css/main.css'
 const Home = () => {
     const { loading, room } = useRoom()
 
+    
     if (loading) return <p>Loading...</p>
     
     return (
