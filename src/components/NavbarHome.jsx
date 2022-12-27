@@ -10,7 +10,7 @@ const NavbarHome = () => {
             <aside className="menu">
                 <Link to='/'
                     className="imgMenu">
-                    <img className='imgLogo' src="../img/ring.png" alt="logo"/>
+                    <img className='imgLogo' src="img/ring.png" alt="logo"/>
                 </Link>
                 <ul className="menuList">
                     <li className="menuListButon">

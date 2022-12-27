@@ -1,8 +1,7 @@
 {
   "name": "message",
   "version": "0.1.0",
-  "homepage": "https://micaelajofre.github.io/message",
-  "private": true,
+  "homepage": "https://micaelajofre.github.io/message/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",

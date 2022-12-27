@@ -15,7 +15,7 @@ const ListRooms = ({ room }) => {
         <div className="containerCard">
             <Link to={{ pathname: '/viewRoom' }} state={room.id}>
             <figure>
-                <img className="imgListRoom" src="../img/fondoAnimales.jpg" alt="imagen de sala" />
+                <img className="imgListRoom" src="img/fondoAnimales.jpg" alt="imagen de sala" />
             </figure>
             <div className="contentCard">
                 <div className="cardTitle">
