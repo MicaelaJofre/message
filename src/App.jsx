@@ -21,16 +21,16 @@ function App() {
         <RoomProvider>
           <MessageProvider>
             <Routes>
-              <Route path='/singup' element={<SingUp />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/resetPassword' element={<ResetPassword />} />
+              <Route path='/singup' element={<SingUp/>} />
+              <Route path='/login' element={<Login/>} />
+              <Route path='/resetPassword' element={<ResetPassword/>} />
               <Route path='/' element={
                   <ProtectedRoute>
                     <Home/>
                   </ProtectedRoute>
                 } />
-              <Route path='/rooms' element={<Rooms />} />
-              <Route path='/updateRoom' element={<UpdateRoom />} />
+              <Route path='/rooms' element={<Rooms/>} />
+              <Route path='/updateRoom' element={<UpdateRoom/>} />
               <Route path='/viewRoom' element={<ViewRoom/>} />
             </Routes>
             </MessageProvider>
