@@ -106,7 +106,8 @@ const Login = () => {
                             </button>
                             <button
                                 onClick={handleGoogle}
-                                className= "buttonLoginGoogle">
+                                className= "buttonLoginGoogle"
+                                type='button'>
                                 {
                                     loading 
                                     ? <>
